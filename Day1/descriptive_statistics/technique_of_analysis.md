@@ -56,6 +56,7 @@ Bivariate analysis examines the relationship between **two variables** to determ
 - The nature of the relationship (linear, non-linear)
 - Potential outliers or anomalies
 
+
 ## Types of Bivariate Analysis
 1. **Numerical vs Numerical**
    - Scatter plots
@@ -76,7 +77,8 @@ Bivariate analysis examines the relationship between **two variables** to determ
 Let's analyze the relationship between study hours and exam scores using a sample dataset.
 
 ### Visualization
-![Bivariate Analysis Plot](bivariate_analysis_plot.png)
+![Study Hours vs Exam Scores](graph/study_hours_vs_scores.png)
+*Figure: Scatter plot showing the positive relationship between study hours and exam scores. The red dashed line represents the linear trend.*
 
 ### Analysis Results
 - **Correlation Coefficient**: 0.91
@@ -112,42 +114,160 @@ Let's analyze the relationship between study hours and exam scores using a sampl
 - Sensitive to outliers
 - Only shows relationship between two variables at a time
 
-## Python Implementation
-```python
-# Basic bivariate analysis with pandas and seaborn
-import seaborn as sns
-import matplotlib.pyplot as plt
 
-# Sample data
-import numpy as np
-np.random.seed(42)
-study_hours = np.random.normal(5, 1.5, 100)
-exam_scores = 30 + 5 * study_hours + np.random.normal(0, 3, 100)
 
-# Create DataFrame
-import pandas as pd
-data = pd.DataFrame({
-    'Study_Hours': study_hours,
-    'Exam_Score': exam_scores
-})
+# <span style="color: #8E44AD">Categorical vs Numerical Analysis</span>
 
-# Scatter plot with regression line
-plt.figure(figsize=(10, 6))
-sns.regplot(x='Study_Hours', y='Exam_Score', data=data, scatter_kws={'alpha':0.6})
-plt.title('Study Hours vs Exam Score')
-plt.xlabel('Study Hours')
-plt.ylabel('Exam Score')
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
+## What is Categorical vs Numerical Analysis?
+This type of analysis helps us understand how a numerical variable differs across different categories. It's particularly useful for comparing groups and identifying patterns or differences between them.
 
-# Calculate correlation
-correlation = data['Study_Hours'].corr(data['Exam_Score'])
-print(f"Correlation coefficient: {correlation:.2f}")
-```
+### Example: Exam Performance by Study Method
+Let's analyze how different study methods affect exam scores. We'll compare three study methods: Self-Study, Group Study, and Tutoring.
 
-## Further Reading
-- Pearson's correlation coefficient
-- Spearman's rank correlation
-- Hypothesis testing for correlation
-- Linear regression analysis
+### Sample Data
+| Student | Study_Method | Exam_Score |
+|---------|-------------|------------|
+| 1       | Self-Study  | 72         |
+| 2       | Group       | 88         |
+| 3       | Tutoring    | 95         |
+| 4       | Self-Study  | 68         |
+| 5       | Group       | 82         |
+| 6       | Tutoring    | 91         |
+| 7       | Self-Study  | 75         |
+| 8       | Group       | 85         |
+| 9       | Tutoring    | 89         |
+| 10      | Self-Study  | 70         |
+
+### Visualization
+
+![Study Method vs Exam Scores](graph/study_method_vs_scores.png)
+*Figure: Box plot comparing exam scores across different study methods. The plot shows the distribution of scores for each study method, with the box representing the interquartile range (IQR), the line inside the box showing the median, and the whiskers extending to show the range of the data. The red dashed line indicates the mean score for each group.*
+
+### Analysis Results
+- **Mean Scores**:
+  - Self-Study: 71.25
+  - Group: 85.00
+  - Tutoring: 91.67
+
+### Key Observations
+1. **Performance Comparison**:
+   - Tutoring shows the highest mean score (91.67), followed by Group study (85.00), and then Self-Study (71.25).
+   - The 20.42 point difference between Tutoring and Self-Study suggests that study method has a significant impact on exam performance.
+
+2. **Score Distribution**:
+   - The box plot reveals that Tutoring has the smallest interquartile range (IQR), indicating more consistent high performance among students.
+   - Self-Study shows the widest spread of scores, suggesting varying levels of effectiveness for different students.
+
+3. **Outliers**:
+   - No significant outliers are present in any group, indicating that the data is relatively consistent within each study method.
+
+4. **Practical Implications**:
+   - Students using Tutoring consistently achieve higher scores, making it the most effective study method among the three.
+   - Group study shows better performance than Self-Study, highlighting the benefit of collaborative learning.
+   - The relatively lower performance in Self-Study suggests that additional support or resources might be needed for students who prefer this method.
+  - Tutoring: 91.67
+
+- **Median Scores**:
+  - Self-Study: 71.5
+  - Group: 85.0
+  - Tutoring: 91.0
+
+### Key Observations
+1. **Tutoring** shows the highest median and mean scores
+2. **Group Study** performs better than Self-Study but not as well as Tutoring
+3. **Self-Study** has the widest range of scores (IQR)
+4. No outliers are present in the data
+
+### Interpretation
+1. **Effectiveness**: Tutoring appears to be the most effective study method based on exam performance
+2. **Consistency**: Group study shows more consistent results (smaller IQR) compared to self-study
+3. **Recommendation**: Students might benefit from combining self-study with group sessions or tutoring
+
+### When to Use This Analysis
+- Comparing performance across different groups
+- Evaluating the effectiveness of different methods/treatments
+- Identifying which categories perform above or below average
+- Understanding the distribution of a numerical variable within categories
+
+## <span style="color: #8E44AD">Categorical vs Categorical Analysis</span>
+
+This type of analysis helps us understand the relationship between two categorical variables, showing how one variable is distributed across the categories of another.
+
+### Example: Study Method vs Exam Result
+Let's analyze how different study methods relate to exam pass/fail rates.
+
+### Sample Data
+| Student_ID | Study_Method | Result |
+|------------|--------------|--------|
+| 1-20      | Self-Study   | 8 Pass, 12 Fail |
+| 21-40     | Group        | 15 Pass, 5 Fail |
+| 41-60     | Tutoring     | 18 Pass, 2 Fail |
+
+### Visualization
+
+![Study Method vs Exam Result](graph/study_method_vs_result.png)
+*Figure: Stacked bar chart showing the distribution of pass/fail results across different study methods. The green portion represents students who passed, while the red portion represents those who failed.*
+
+### Analysis Results
+- **Pass Rates by Method**:
+  - Tutoring: 90% pass rate (18/20)
+  - Group: 75% pass rate (15/20)
+  - Self-Study: 40% pass rate (8/20)
+
+### Key Observations
+1. **Effectiveness**: Tutoring shows the highest pass rate, with 90% of students passing.
+2. **Performance Gap**: There's a 50% difference in pass rates between Tutoring and Self-Study methods.
+3. **Consistency**: The pass rate increases consistently from Self-Study to Group to Tutoring.
+
+### Practical Implications
+- **Educational Value**: Tutoring appears to be the most effective study method for exam success.
+- **Resource Allocation**: Schools might consider allocating more resources to tutoring programs.
+- **Student Support**: Students relying on self-study might benefit from additional support structures.
+
+## <span style="color: #27AE60">Numerical vs Numerical Analysis</span>
+
+This type of analysis helps us understand the relationship between two numerical variables, allowing us to identify correlations, trends, and patterns in the data.
+
+### Example: Years of Experience vs Salary
+Let's analyze the relationship between years of work experience and annual salary in a professional setting.
+
+### Sample Data Summary
+| Statistic          | Years of Experience | Annual Salary ($) |
+|--------------------|---------------------|-------------------|
+| Count             | 100                 | 100               |
+| Mean              | 10.2 years          | 63,750            |
+| Standard Deviation| 5.8 years           | 14,200            |
+| Minimum           | 0.1 years           | 30,000            |
+| 25% Percentile    | 5.4 years           | 52,500            |
+| 50% Percentile    | 10.1 years          | 63,000            |
+| 75% Percentile    | 15.2 years          | 74,500            |
+| Maximum           | 19.9 years          | 97,500            |
+
+### Visualization
+
+![Experience vs Salary](graph/exp_vs_salary.png)
+*Figure: Scatter plot showing the relationship between years of experience and annual salary. The red line represents the linear regression line, while the green and purple dashed lines indicate the mean years of experience and mean salary, respectively.*
+
+### Analysis Results
+- **Correlation Coefficient**: 0.83 (Strong positive correlation)
+- **Regression Equation**: Salary = 2,500 × Years_Experience + 38,750
+- **R-squared Value**: 0.69 (69% of the variation in salary can be explained by years of experience)
+
+### Key Observations
+1. **Positive Relationship**:
+   - There's a clear positive correlation between years of experience and salary
+   - On average, each additional year of experience is associated with a $2,500 increase in annual salary
+
+2. **Variability**:
+   - While the trend is positive, there's significant variability around the regression line
+   - Some professionals with similar experience levels have notably different salaries
+
+3. **Distribution**:
+   - The distribution of data points shows more spread at higher experience levels
+   - The highest salaries are achieved by those with 10+ years of experience
+
+### Practical Implications
+- **Career Planning**: Employees can use this data to set realistic salary expectations based on experience
+- **Compensation Strategy**: HR departments can benchmark their salary structures against this industry trend
+- **Skill Development**: The variability suggests that factors beyond just years of experience (e.g., education, certifications, performance) significantly impact earnings
+- **Early Career Growth**: The steeper slope in early career years suggests that initial experience gains have a proportionally larger impact on salary
